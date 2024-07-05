@@ -1,5 +1,5 @@
-Information for the wedding of Jacob and Johanna
+Information om Jacob och Johannas bröllop
 
-Here are some useful link
-* [Logistics](/Wedding/Logistics) - Here you will find the stuff that you will be checking in the morning of the wedding, such as time and locations for the different events of the wedding.
-* [FAQ](/Wedding/docs/Rules) - Here you will find answers to some of the questions that may arise. 
+Här är några användbara länkar:
+* [Logistik](/Wedding/Logistics) - Här hittar ni information som ni behöver kolla på bröllopsmorgonen, såsom tider och platser för de olika evenemangen under bröllopet.
+* [FAQ](/Wedding/docs/FAQ) - Här hittar ni svar på några av de frågor som kan dyka upp.
