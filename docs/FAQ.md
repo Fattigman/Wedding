@@ -1,3 +1,4 @@
+## Vanliga frågor
 ### Vad är det för Klädkod? Halvformell
 Klädkoden för evenemanget är halvformell. Det innebär att vi vill se er i kostymer, men med mindre regler kring vilka färger eller slipsar ni ska bära. Bär en svart kostym om ni vill, eller välj en färgglad! Vad som än gör er glada.
 ### Kan jag ta med mig mina barn? Nej
