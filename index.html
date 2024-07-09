@@ -19,126 +19,57 @@
         .card:hover {
             transform: scale(1.05);
         }
-        body {
-            margin: 0rem;
-            overflow-x: hidden;
-        }
-
-        #image-track-container {
-            overflow-x: hidden;
-            overflow-y: hidden;
-            width: 100%;
-            position: relative;
-            touch-action: none;
-        }
-
-        #image-track {
-            display: flex;
-            gap: 4vmin;
-            left: 25%;
-            position: relative;
-            user-select: none;
-            width: calc(100vw * 2); /* Adjust width according to the number of images */
-        }
-
-        #image-track > .image {
-            width: 40vmin;
-            height: 56vmin;
-            object-fit: cover;
-            object-position: 100% center;
-            flex-shrink: 0;
-        }
     </style>
 </head>
 <body class="text-center p-10">
     <h1 class="text-4xl">Välkommen till Jacob och Johannas bröllop!</h1>
-    <div id="image-track-container" class="m-10">
-        <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
-            <!-- <img class="image" src="img/couple_date.jpeg" draggable="false" /> -->
-            <!-- <img class="image" src="img/couple_sicily.jpeg" draggable="false" /> -->
-            <img class="image" src="img/couple_hike.jpeg" draggable="false" />
-            <img class="image" src="img/couple_cat.jpeg" draggable="false" />
-            <img class="image" src="img/couple.jpg" draggable="false" />
-            <img class="image" src="img/couple_ski2.jpeg" draggable="false" />
-            <img class="image" src="img/couple_hike2.jpeg" draggable="false" />
-            <!-- <img class="image" src="img/couple_date2.jpeg" draggable="false" /> -->
+    <div class="carousel w-full rounded-box">
+        <div id="item1" class="carousel-item w-full flex justify-center">
+          <img
+            src="img/couple.jpg"
+            class="max-w-1/2 h-auto" />
         </div>
-    </div>
+        <div id="item2" class="carousel-item w-full flex justify-center">
+          <img
+            src="img/couple_ski2.jpeg"
+            class="max-w-1/2 h-auto" />
+        </div>
+        <div id="item3" class="carousel-item w-full flex justify-center">
+          <img
+            src="img/couple_hike.jpeg"
+            class="max-w-1/2 h-auto" />
+        </div>
+        <div id="item4" class="carousel-item w-full flex justify-center">
+          <img
+            src="img/couple_cat.jpeg"
+            class="max-w-1/2 h-auto" />
+        </div>
+      </div>
     <p class="text-xl mt-6">Ni är välkomna till Lidingö kyrka den 9:e Augusti 2025.</p>
       
     <section class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <a href="pages/schema.html">
-            <div class="card bg-white shadow-lg rounded-lg p-6">
-                <h2 class="text-2xl font-bold mb-4">Program</h2>
-                <p>Här hittar du information om bröllopsprogrammet.</p>
-            </div>
-        </a>
-        <a href="pages/logistik.html">
-            <div class="card bg-white shadow-lg rounded-lg p-6">
-                <h2 class="text-2xl font-bold mb-4">Logistik</h2>
-                <p>Information om transport och boende.</p>
-            </div>
-        </a>   
-        <a href="pages/registration.html">
-            <div class="card bg-white shadow-lg rounded-lg p-6">
-                <h2 class="text-2xl font-bold mb-4">Anmälan</h2>
-                <p>Här kan du anmäla dig till bröllopet.</p>
-            </div>
-        </a> 
-        <div class="card bg-white shadow-lg rounded-lg p-6">
+        <div class="card bg-white shadow-lg rounded-lg p-6" data-message="Not yet available, will be coming soon in the future">
+            <h2 class="text-2xl font-bold mb-4">Program</h2>
+            <p>Här hittar du information om bröllopsprogrammet.</p>
+        </div>
+        <div class="card bg-white shadow-lg rounded-lg p-6" data-message="Not yet available, will be coming soon in the future">
+            <h2 class="text-2xl font-bold mb-4">Logistik</h2>
+            <p>Information om transport och boende.</p>
+        </div>   
+        <div class="card bg-white shadow-lg rounded-lg p-6" data-message="Not yet available, will be coming soon in the future">
+            <h2 class="text-2xl font-bold mb-4">Anmälan</h2>
+            <p>Här kan du anmäla dig till bröllopet.</p>
+        </div> 
+        <div class="card bg-white shadow-lg rounded-lg p-6" data-message="Not yet available, will be coming soon in the future">
             <h2 class="text-2xl font-bold mb-4">FAQ</h2>
             <p>Vanliga frågor och svar.</p>
         </div>
-        <div class="card bg-white shadow-lg rounded-lg p-6">
+        <div class="card bg-white shadow-lg rounded-lg p-6" data-message="Not yet available, will be coming soon in the future">
             <h2 class="text-2xl font-bold mb-4">Efter brölloppet</h2>
             <p>Information om festligheterna efter bröllopet.</p>
         </div>
     </section>
+
 </body>
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-    const track = document.getElementById("image-track");
-
-    const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
-
-    const handleOnUp = () => {
-        track.dataset.mouseDownAt = "0";  
-        track.dataset.prevPercentage = track.dataset.percentage;
-    }
-
-    const handleOnMove = e => {
-        if(track.dataset.mouseDownAt === "0") return;
-
-        const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
-              maxDelta = window.innerWidth / 2;
-
-        const percentage = (mouseDelta / maxDelta) * -100,
-              nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
-              nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
-
-        track.dataset.percentage = nextPercentage;
-
-        track.animate({
-            transform: `translate(${nextPercentage}%, 0%)`
-        }, { duration: 1200, fill: "forwards" });
-
-        for(const image of track.getElementsByClassName("image")) {
-            image.animate({
-                objectPosition: `${100 + nextPercentage}% center`
-            }, { duration: 1200, fill: "forwards" });
-        }
-    }
-
-    window.onmousedown = e => handleOnDown(e);
-
-    window.ontouchstart = e => handleOnDown(e.touches[0]);
-
-    window.onmouseup = e => handleOnUp(e);
-
-    window.ontouchend = e => handleOnUp(e.touches[0]);
-
-    window.onmousemove = e => handleOnMove(e);
-
-    window.ontouchmove = e => handleOnMove(e.touches[0]);
-</script>
 </html>
