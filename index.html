@@ -20,20 +20,25 @@
             transform: scale(1.05);
         }
         body {
-            /* height: 100vh; */
-            /* width: 100vw; */
             margin: 0rem;
             overflow-x: hidden;
+        }
+
+        #image-track-container {
+            overflow-x: hidden;
+            overflow-y: hidden;
+            width: 100%;
+            position: relative;
+            touch-action: none;
         }
 
         #image-track {
             display: flex;
             gap: 4vmin;
-            /* position: absolute; */
             left: 50%;
-            top: 50%;
-            /* transform: translate(0%, -50%);  */
-            user-select: none; /* -- Prevent image highlighting -- */
+            position: relative;
+            user-select: none;
+            width: calc(100vw * 2); /* Adjust width according to the number of images */
         }
 
         #image-track > .image {
@@ -41,23 +46,24 @@
             height: 56vmin;
             object-fit: cover;
             object-position: 100% center;
+            flex-shrink: 0;
         }
     </style>
 </head>
 <body class="text-center p-10">
     <h1 class="text-4xl">Välkommen till Jacob och Johannas bröllop!</h1>
-    <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0" class="m-10">
-        <img class="image" src="img/couple_date.jpeg" draggable="false" />
-        <img class="image" src="img/couple_sicily.jpeg" draggable="false" />
-        <img class="image" src="img/couple.jpg" draggable="false" />
-        <img class="image" src="img/couple_cat.jpeg" draggable="false" />
-        <img class="image" src="img/couple_hike.jpeg" draggable="false" />
-        <img class="image" src="img/couple_ski2.jpeg" draggable="false" />
-        <img class="image" src="img/couple_date2.jpeg" draggable="false" />
-        <img class="image" src="img/couple_hike2.jpeg" draggable="false" />
-        <!-- <img class="image" src="img/couple_gym.jpeg" draggable="false" /> -->
-      </div>
-    <!-- <img src="img/couple.jpg" alt="Bröllopsbild" class="rounded-lg mt-6 w-1/2 mx-auto"> -->
+    <div id="image-track-container" class="m-10">
+        <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+            <img class="image" src="img/couple.jpg" draggable="false" />
+            <img class="image" src="img/couple_date.jpeg" draggable="false" />
+            <img class="image" src="img/couple_sicily.jpeg" draggable="false" />
+            <img class="image" src="img/couple_cat.jpeg" draggable="false" />
+            <img class="image" src="img/couple_hike.jpeg" draggable="false" />
+            <img class="image" src="img/couple_ski2.jpeg" draggable="false" />
+            <img class="image" src="img/couple_date2.jpeg" draggable="false" />
+            <img class="image" src="img/couple_hike2.jpeg" draggable="false" />
+        </div>
+    </div>
     <p class="text-xl mt-6">Ni är välkomna till Lidingö kyrka den 9:e Augusti 2025.</p>
       
     <section class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -96,31 +102,31 @@
     const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
 
     const handleOnUp = () => {
-    track.dataset.mouseDownAt = "0";  
-    track.dataset.prevPercentage = track.dataset.percentage;
+        track.dataset.mouseDownAt = "0";  
+        track.dataset.prevPercentage = track.dataset.percentage;
     }
 
     const handleOnMove = e => {
-    if(track.dataset.mouseDownAt === "0") return;
+        if(track.dataset.mouseDownAt === "0") return;
 
-    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
-            maxDelta = window.innerWidth / 2;
+        const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+              maxDelta = window.innerWidth / 2;
 
-    const percentage = (mouseDelta / maxDelta) * -100,
-            nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
-            nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
+        const percentage = (mouseDelta / maxDelta) * -100,
+              nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+              nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
 
-    track.dataset.percentage = nextPercentage;
+        track.dataset.percentage = nextPercentage;
 
-    track.animate({
-        transform: `translate(${nextPercentage}%, 0%)`
-    }, { duration: 1200, fill: "forwards" });
-
-    for(const image of track.getElementsByClassName("image")) {
-        image.animate({
-        objectPosition: `${100 + nextPercentage}% center`
+        track.animate({
+            transform: `translate(${nextPercentage}%, 0%)`
         }, { duration: 1200, fill: "forwards" });
-    }
+
+        for(const image of track.getElementsByClassName("image")) {
+            image.animate({
+                objectPosition: `${100 + nextPercentage}% center`
+            }, { duration: 1200, fill: "forwards" });
+        }
     }
 
     window.onmousedown = e => handleOnDown(e);
