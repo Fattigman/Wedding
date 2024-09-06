@@ -19,6 +19,14 @@
         .card:hover {
             transform: scale(1.05);
         }
+        .carousel-item img {
+            max-width: 50%; /* Limit the maximum width of the images */
+            height: auto; /* Maintain the aspect ratio */
+            object-fit: cover; /* Ensure images cover the area without distortion */
+        }
+        .carousel-item {
+            height: auto; /* Adjust the height to fit the content */
+        }
     </style>
 </head>
 <body class="text-center p-10">
@@ -27,22 +35,26 @@
         <div id="item1" class="carousel-item w-full flex justify-center">
           <img
             src="img/couple.jpg"
-            class="max-w-1/2 h-1/2" />
+            alt="Couple"
+          />
         </div>
         <div id="item2" class="carousel-item w-full flex justify-center">
           <img
             src="img/couple_ski2.jpeg"
-            class="max-w-1/2 h-1/2" />
+            alt="Couple skiing"
+          />
         </div>
         <div id="item3" class="carousel-item w-full flex justify-center">
           <img
             src="img/couple_hike.jpeg"
-            class="max-w-1/2 h-1/2" />
+            alt="Couple hiking"
+          />
         </div>
         <div id="item4" class="carousel-item w-full flex justify-center">
           <img
             src="img/couple_cat.jpeg"
-            class="max-w-1/2 h-1/2" />
+            alt="Couple with cat"
+          />
         </div>
       </div>
     <p class="text-xl mt-6">Ni är välkomna till Lidingö kyrka den 9:e Augusti 2025.</p>
